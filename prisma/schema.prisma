@@ -37,7 +37,7 @@ model Term {
 model Discipline {
   id                 Int                 @id @default(autoincrement())
   name               String              @unique
-  term               Term                @relation(fields: [termId], references: [id])
+  term               Term                @relation(fields: [termId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   termId             Int
   teacherDisciplines TeacherDiscipline[]
 
@@ -54,9 +54,9 @@ model Category {
 
 model TeacherDiscipline {
   id           Int        @id @default(autoincrement())
-  teacher      Teacher    @relation(fields: [teacherId], references: [id])
+  teacher      Teacher    @relation(fields: [teacherId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   teacherId    Int
-  discipline   Discipline @relation(fields: [disciplineId], references: [id])
+  discipline   Discipline @relation(fields: [disciplineId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   disciplineId Int
   tests        Test[]
 }
@@ -65,9 +65,9 @@ model Test {
   id                  Int               @id @default(autoincrement())
   name                String
   pdfUrl              String
-  category            Category          @relation(fields: [categoryId], references: [id])
+  category            Category          @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   categoryId          Int
-  teacherDiscipline   TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id])
+  teacherDiscipline   TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   teacherDisciplineId Int
 
   @@map("tests")
